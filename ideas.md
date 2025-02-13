@@ -3,6 +3,7 @@
     - https://www.isic-archive.com/ https://challenge.isic-archive.com/data/
     - http://ludo17.free.fr/mitos_2012/dataset.html detection of cancer
     - Edible vs. Toxic Mushroom Classifier
+    - AI vs Human created content
  
       
 - Object detection
