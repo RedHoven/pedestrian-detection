@@ -29,3 +29,4 @@ Cool?
     
 - Other:
     - Transfer learning (model fine-tunned to segment football matches to segment basketball)
+    - Generative approaches
