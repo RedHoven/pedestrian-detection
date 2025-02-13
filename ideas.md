@@ -28,5 +28,5 @@ Cool?
     - pingpong/voleyball score counter ? video 
     
 - Other:
-    - Transfer learning (model fine-tunned to segment football matches to segment basketball)
+    - Transfer learning (model fine-tunned to segment football matches to segment basketball) (or build on general and fine-tune on more specific)
     - Generative approaches
