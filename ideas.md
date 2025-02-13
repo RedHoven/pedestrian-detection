@@ -26,3 +26,5 @@ Cool?
     - Lip reading https://www.robots.ox.ac.uk/~vgg/data/lip_reading/lrs2.html - video though 
     - pingpong/voleyball score counter ? video 
     
+- Other:
+    - Transfer learning (model fine-tunned to segment football matches to segment basketball)
