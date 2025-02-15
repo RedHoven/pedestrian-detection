@@ -5,12 +5,7 @@
     - Edible vs. Toxic Mushroom Classifier
     - AI vs Human created content
  
-      
-- Object detection
-    - Counting objects
-        - Candies in a jar
-    - Hotdog detection
-    - where is waldo https://www.kaggle.com/datasets/residentmario/wheres-waldo/data segmenting maybe informed net to look in some areas earlier make a hitmap of where the waldo is most often 
+most often 
     - Emotion recognition
     - Detect hidden objects (weapons, contraband, or anomalies) in X-ray images, similar to airport security scanners. are there datasets??
     - sign language translation
@@ -23,9 +18,7 @@ Denoising
     - https://paperswithcode.com/sota/single-image-deraining-on-raincityscapes
     - 
     
-Cool?
-    - Lip reading https://www.robots.ox.ac.uk/~vgg/data/lip_reading/lrs2.html - video though 
-    - pingpong/voleyball score counter ? video 
+
     
 - Other:
     - Transfer learning (model fine-tunned to segment football matches to segment basketball) (or build on general and fine-tune on more specific)
