@@ -1,3 +1,26 @@
+# Trafic Signs - the data in the traffic startup 
+-Comparing finetuning training 
+-Adversarial attacks 
+-People detecting race bias  
+-Transfer learning 
+-Layers visualization 
+-Object detection vs segmentation - what is useful 
+-how object detection can improve the segmentation of the model 
+-Datasets:
+https://cocodataset.org/#explore 
+
+-Papers/models:
+
+- https://arxiv.org/pdf/1703.06870 MaskRCNN
+- https://arxiv.org/pdf/1506.02640 Yolo - train from scratch based on the paper
+- https://arxiv.org/pdf/2004.10934v1 Yolov4
+- - https://yolov8.com/ Yolov8
+- https://arxiv.org/pdf/2211.07636v2 EVA ?? good?
+
+
+
+
+
 # Project Ideas
 - classification
     - https://www.isic-archive.com/ https://challenge.isic-archive.com/data/
@@ -8,7 +31,7 @@
 most often 
     - Emotion recognition
     - Detect hidden objects (weapons, contraband, or anomalies) in X-ray images, similar to airport security scanners. are there datasets??
-    - sign language translation
+
     - Music Genre Prediction from Album Covers
     - https://github.com/AlexOlsen/DeepWeeds weeds detection
     - Chess Move Predictor Chessboard datasets, Lichess API
