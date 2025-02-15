@@ -4,11 +4,12 @@
 -People detecting race bias  
 -Transfer learning 
 -Layers visualization 
--Object detection vs segmentation - what is useful 
+-Object detection vs segmentation - what is useful
 -how object detection can improve the segmentation of the model 
 
 -Datasets:
-https://cocodataset.org/#explore 
+https://cocodataset.org/#explore
+https://universe.roboflow.com/citypersons-conversion/citypersons-woqjq/dataset/9
 
 -Papers/models:
 - https://arxiv.org/pdf/1703.06870 MaskRCNN
@@ -31,8 +32,8 @@ Project steps:
 before Friday
 sota
 - EVA
-- YOLOv8
--
+- YOLOv8...v11
+- MaskRCNN
 what we cat train / architectures
 - 
 -
