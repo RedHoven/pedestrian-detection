@@ -1,4 +1,4 @@
-# Pedestrian - the data in the traffic startup 
+# Pedestrian - the data in the traffic startup
 -Comparing finetuning training 
 -Adversarial attacks 
 -People detecting race bias  
@@ -38,10 +38,13 @@ Project steps:
 - literature review -> find sota architecture + some clever modification
 - train a phat model / fine-tunning
 - RQs [choose 3 from below]
+    - using a buffer between pre-trained model parts
     - visuaizing layers
     - in the wild + weather + lighting + inside / outside built up area
     - racial bias
     - transfer learning
+        - people on the road -> people in other setting
+        - people -> road signs
     - adversarial attacks
 - web blog on GitHub
 
@@ -59,7 +62,7 @@ what we cat train / architectures
 - YOLO for BB prediction v8-v12 with convolutions, YOLOCAST++ with attention. (i.e. Head)
     - fine-tune existing ones or train from scratch
 - Loss depending on a task
-    - For detection, IoU/smooth L1 loss with focal loss (https://paperswithcode.com/method/focal-loss
+    - For detection, smooth L1 loss with focal loss (https://paperswithcode.com/method/focal-loss
     - Smooth L1 loss for detection: https://medium.com/@abhishekjainindore24/smooth-l1-loss-in-object-detection-faf8efd4569a#:~:text=Smooth%20L1%20Loss%20is%20widely,%2Ch)%20of%20bounding%20boxes.
 (optional: segmentation)
 - MaskR-CNN/DeepLabV3+/BlenMask for detailed segmentation
@@ -73,7 +76,26 @@ what modification we can apply
     - we can test for it with Occlusion Sensitivity Score (OSS)
 on Friday
 - select favourite
-- have a meeting with Ana to settle on the best option 
+- have a meeting with Ana to settle on the best option
+
+model ideas
+- Research
+    - Pedestron https://github.com/hasanirtiza/Pedestron
+    - YOLO as a baseline 
+    - fine-tuining YOLO
+- Training task
+    - take the best YOLO used for pedestrian detection, identify the dataset, the metrics, etc.
+    - fine-tune the chosen YOLO (or some other architecture) on a different from the paper dataset, compare it with the paper YOLO
+    - improve the chosen YOLO arch and test
+    - compare the results of these 3 models
+- Research questions
+- Vizualization of the last layer plus testing a hypothesis about how the model detect people
+- Find a dataset with weather/ distortions or create an augmented dataset
+- Transfer learning
+    - people on the road -> people in other setting
+    - people -> road signs
+    - LORA
+
 
 
 <!--  # Project Ideas
