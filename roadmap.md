@@ -10,13 +10,29 @@
 -Datasets:
 https://cocodataset.org/#explore
 https://universe.roboflow.com/citypersons-conversion/citypersons-woqjq/dataset/9
+https://eurocity-dataset.tudelft.nl/eval/user/login?_next=/eval/downloads/detection (behind login)
+https://synscapes.on.liu.se/ (realistic but synthetic street data)
 
 -Papers/models:
 - https://arxiv.org/pdf/1703.06870 MaskRCNN
+- https://arxiv.org/abs/1802.02611 DeepLabV3+
+- https://arxiv.org/abs/1908.07919 HRNet
 - https://arxiv.org/pdf/1506.02640 Yolo - train from scratch based on the paper
-- https://arxiv.org/pdf/2004.10934v1 Yolov4
+- - https://arxiv.org/pdf/2004.10934v1 Yolov4
 - - https://yolov8.com/ Yolov8
-- https://arxiv.org/pdf/2211.07636v2 EVA ?? good?
+- - https://arxiv.org/html/2502.12524v1 Yolov12
+- https://arxiv.org/pdf/2211.07636v2 EVA
+- https://arxiv.org/abs/1912.06218 YoLACAST++
+- https://arxiv.org/abs/2001.00309 BlendMask
+
+A nice bench with different SOTA models for pedestrian detection: https://www.sciencedirect.com/science/article/pii/S2667379723000293 and different datasets
+
+-Metrics:
+- object detection
+    - Mean Average Precision (MAP): AP for a range of IoU thresholds from 0.05 to 0.95. Very strong
+- segmentation
+    - Intersection over union (IoU) aka Jacard
+    - Dice
 
 Project steps:
 - literature review -> find sota architecture + some clever modification
@@ -32,14 +48,29 @@ Project steps:
 before Friday
 sota
 - EVA
-- YOLOv8...v11
+- YOLOv8...v12
+    - Plenty of models: https://leaderboard.roboflow.com/
 - MaskRCNN
+- HRNet
 what we cat train / architectures
-- 
--
+- EVA / HRNet as a backbone feature extractor pre-trained on ImageNet
+- Feature pyramid network FPN to convert arbitrary sized input to a proportionally sized featur map  (i.e. Neck)
+    - We can use FPN from Mask R-CNN
+- YOLO for BB prediction v8-v12 with convolutions, YOLOCAST++ with attention. (i.e. Head)
+    - fine-tune existing ones or train from scratch
+- Loss depending on a task
+    - For detection, IoU/smooth L1 loss with focal loss (https://paperswithcode.com/method/focal-loss
+    - Smooth L1 loss for detection: https://medium.com/@abhishekjainindore24/smooth-l1-loss-in-object-detection-faf8efd4569a#:~:text=Smooth%20L1%20Loss%20is%20widely,%2Ch)%20of%20bounding%20boxes.
+(optional: segmentation)
+- MaskR-CNN/DeepLabV3+/BlenMask for detailed segmentation
+    - We can use FPN from Mask R-CNN
+    - training both detection and segmention may require multi-task loss function
 what modification we can apply
--
--
+- Train on COCO -> Fine-tune on CityPersons
+- Increase robustness by addind malicious training data, data augmentation
+- classify pedestrians: 
+- oclusion is one of the problems
+    - we can test for it with Occlusion Sensitivity Score (OSS)
 on Friday
 - select favourite
 - have a meeting with Ana to settle on the best option 
