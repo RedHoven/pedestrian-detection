@@ -1,1 +1,85 @@
 yolov5
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+*.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Log files
+*.log
+
+# Local environment variables
+.env
+.env.*
+*.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS files
+.DS_Store
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Testing
+.coverage
+.tox/
+nosetests.xml
+pytest_cache/
+
+# Pip dependency caches
+pip-wheel-metadata/
+__pypackages__/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+
+# PyCharm
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook metadata
+.ipynb_checkpoints/
+
+# Profiling data
+*.prof
+*.dat
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage*
+
+# Data files
+*.csv
+*.tsv
+*.json
+*.db
+*.sqlite3
