@@ -96,6 +96,12 @@ model ideas
     - people -> road signs
     - LORA
 
+Plan:
+1. fine-tune YOLOv8 on our dataset
+2. Answer research questions
+3. Attempt a bigger model
+
+Minimum: Compare model performance on different research questoins
 
 
 <!--  # Project Ideas
