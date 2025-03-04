@@ -1,4 +1,4 @@
-# Pedestrian Detection Algorithm
+# Pedestrian Detection 
 
 <!-- ![alt text](Isolated.png "Title") -->
 
@@ -8,18 +8,21 @@
 
 Pedestrian detection is a critical task in computer vision with significant real-world implications. It is a fundamental component of autonomous driving, traffic monitoring, and smart surveillance systems. As urban areas become more congested and the number of vehicles on the road increases, ensuring pedestrian safety through intelligent vision systems is more important than ever. Pedestrian detection algorithms are essential for preventing accidents, improving traffic flow, and enhancing the safety of vulnerable road users.
 
-However, building a robust pedestrian detection system comes with its challenges. Variations in lighting, weather conditions, occlusions, and adversarial attacks pose significant hurdles. Understanding these challenges and addressing them effectively is key to developing reliable systems.
+However, building a robust pedestrian detection system comes with its challenges. Variations in lighting, weather conditions, occlusions, and adversarial attacks pose significant challenges. Understanding and addressing them effectively is needed to developing reliable traffic systems.
 
-## Our Approach: A Threefold Perspective
+## Our Approach:
+In our research we focus on three main areas: 
 
-### 1. Explainability
-A common criticism of deep learning models is their "black-box" nature. To address this, we analyze and visualize the layers of our pedestrian detection model to understand how it makes decisions. By leveraging techniques such as activation maps, feature visualization, and saliency maps, we aim to shed light on the inner workings of the model. This not only helps in debugging and improving the model but also builds trust in its decisions.
 
-### 2. Transfer Learning
-Training deep learning models from scratch is computationally expensive and requires vast amounts of labeled data. Instead, we utilize transfer learning, where a pre-trained model (e.g., a convolutional neural network trained on ImageNet) is fine-tuned for pedestrian detection. This approach significantly reduces training time and improves performance, especially when labeled pedestrian data is limited.
+### 1. Transfer Learning
+Training deep learning models from scratch is computationally expensive and requires vast amounts of labeled data. Instead, we utilize transfer learning, where a pre-trained model (e.g., a convolutional neural network trained on ImageNet) is fine-tuned for pedestrian detection. This approach significantly reduces training time and improves performance, especially when labeled pedestrian data is limited. We also test the limits in how much data and computational power is needed to change the detection task to new classes.
 
-### 3. Adversarial Attacks
-Pedestrian detection models can be vulnerable to adversarial attacks—both natural and malicious. Natural adversarial examples include challenging weather conditions such as rain, fog, and snow, which can degrade the model’s performance. Malicious attacks involve adversarial perturbations designed to trick the model into misclassifying pedestrians, leading to safety risks in real-world applications. We study the robustness of our model against these attacks and explore mitigation strategies to enhance its reliability.
+### 2. Robustness
+Pedestrian detection models can be sensitive to variations in image data, including changes in lighting, weather conditions, image quality, and differences in human appearance. We evaluate how these models perform across diverse settings and explore strategies to increase their robustness.
+
+### 3. Explainability
+A common criticism of deep learning models is their "black-box" nature. To address this, we analyze and visualize the layers of our pedestrian detection model to understand how it makes decisions.
+
 
 ### Research questions: 
 
@@ -29,6 +32,13 @@ Pedestrian detection models can be vulnerable to adversarial attacks—both natu
 
 3. How can layers visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
 
+<!-- 346 WORDS -->
+
+## Literature Review
+
+TODO 
+
+<!-- 
 ### Related research that we build upon:
 
 how it's done now: what current typical approach(es)
@@ -80,4 +90,14 @@ what you propose (e.g. explanation of what you're gonna implement but in words)
 # Plan
 1. fine-tune YOLOv8 on our dataset
 2. Answer research questions
-3. Attempt a bigger model
+3. Attempt a bigger model -->
+
+
+## Training 
+
+### YOLO 
+
+TODO 
+
+### DETR 
+
