@@ -83,3 +83,8 @@ htmlcov/
 *.json
 *.db
 *.sqlite3
+
+# Project specific
+datasets/
+yolo_training/
+*.html
