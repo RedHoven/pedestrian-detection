@@ -87,4 +87,4 @@ htmlcov/
 # Project specific
 datasets/
 yolo_training/
-*.html
+_site/

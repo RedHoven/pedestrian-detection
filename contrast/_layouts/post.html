@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<article>
+  {% include meta.html post=page %}
+  {{ content }}
+  {% if page.comments != false %}
+    <hr>
+     {% include comments.html %}
+    <noscript>Please enable JavaScript to view comments.</noscript>
+  {% endif %}
+</article>
