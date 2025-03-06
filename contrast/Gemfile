@@ -1,13 +1,13 @@
 source "https://rubygems.org"
 
-# gem "jekyll", "~> 4.2.0"
-gem "github-pages", group: :jekyll_plugins
 gem "webrick", "~> 1.7"
-gem "csv"
-gem "base64"
-gem "bigdecimal"
-gem "logger"
+gem "csv", "~> 3.3"
+gem "base64", "~> 0.2"
+gem "bigdecimal", "~> 3.1"
+gem "logger", "~> 1.6"
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-gist", "~> 1.5"
+  gem "github-pages", "~> 232"
 end
