@@ -33,12 +33,12 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./contrast
-          destination: ./contrast/_site
+          source: ./lanyon
+          destination: ./lanyon/_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./contrast/_site/
+          path: ./lanyon/_site/
 
   # Deployment job
   deploy:
