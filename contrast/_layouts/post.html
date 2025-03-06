@@ -5,7 +5,7 @@ layout: default
 <article>
   {% include meta.html post=page %}
   {{ content }}
-  {% if page.comments != false %}
+  {% if page.comments == true %}
     <hr>
      {% include comments.html %}
     <noscript>Please enable JavaScript to view comments.</noscript>
