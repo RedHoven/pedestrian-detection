@@ -47,6 +47,10 @@ https://arxiv.org/pdf/2404.08081
 
 Fine tune DETR:
 https://arxiv.org/abs/2005.12872
+(here they user RL-DETR-L, we are going to use rtdetr_r50vd)
+
+PED is pedestrian DETR:
+https://arxiv.org/pdf/2012.06785
 
 Add the prompt (trainable vector):
 https://arxiv.org/abs/2203.12119
@@ -56,7 +60,6 @@ https://arxiv.org/abs/2203.12119
 MMPedestron:
 https://arxiv.org/pdf/2407.10125v1
 this uses IR pictures which are not always available - not good
-
 
 https://arxiv.org/abs/2404.19299
 The method enhances pedestrian detection, especially in challenging scenarios like small-scale or heavily occluded pedestrians.
@@ -92,12 +95,19 @@ what you propose (e.g. explanation of what you're gonna implement but in words)
 2. Answer research questions
 3. Attempt a bigger model -->
 
+### Dataset
+
+We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity-dataset.tudelft.nl/) benchmark as the data for fine-tuning and testing our models. ECP features street-level city images from a driver's point of view. The entire dataset contains images from all seasons and from 12 cities, with various weather conditions and from different parts of a day. The dataset includes both crowds and heavy occlusions. We decided to use the validation part because of its reasonable size for our experiments: 10 GB and 4266 image-label pairs. We randomly split the images and corresponding annotations from all the cities into train, validation, and test sets in 70-10-20 ratio.
 
 ## Training 
 
+We decided to fine-tune a pre-trained a YOLO model which show competitive predictive performance in pedestrian detection on images from city traffic cameras [link](https://arxiv.org/pdf/2404.08081). Additionally, we chose [what?] because it' s blablabla.
+
 ### YOLO 
 
-TODO 
+We used `YOLOv8l` model pre-trained on [COCO](https://cocodataset.org/#home) dataset for object detection. The model is vailable in [Ulitralitics PyPI package](https://pypi.org/project/ultralytics/). While newer versions were proposed, the 8th version still remains a strong baseline for pedestrian detection.
 
-### DETR 
+We trained the model on 50 epochs with batch size of 16. To speed up the training, the images were resized to fit a 640x640 pixels square with a preserved aspect ratio. The rest of the image was padded with grey pixels.
+
+### Other Model? Why?
 
