@@ -512,7 +512,7 @@ a.pagination-item:hover {
 .theme-base-0e .sidebar,
 .theme-base-0e .sidebar-toggle:active,
 .theme-base-0e #sidebar-checkbox:checked ~ .sidebar-toggle {
-  background-color: #aa759f;
+  background-color: #162545;
 }
 .theme-base-0e .container a,
 .theme-base-0e .sidebar-toggle,
@@ -532,6 +532,17 @@ a.pagination-item:hover {
   color: #8f5536;
 }
 
+/* TUDelft */
+.theme-base-tudelft .sidebar,
+.theme-base-tudelft .sidebar-toggle:active,
+.theme-base-tudelft #sidebar-checkbox:checked ~ .sidebar-toggle {
+  background-color: #0C2340;
+}
+.theme-base-tudelft .container a,
+.theme-base-tudelft .sidebar-toggle,
+.theme-base-tudelft .related-posts li a:hover {
+  color: #0076C2;
+}
 
 /*
  * Overlay sidebar
