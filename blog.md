@@ -40,8 +40,6 @@ A common criticism of deep learning models is their "black-box" nature. To addre
 
 Pedestrian detection has evolved significantly with deep learning, transitioning from traditional methods **(HOG+SVM, DPM)** do not use short version for the first time to CNN-based models. Two-stage detectors like Faster R-CNN (Ren et al., 2015) introduced Region Proposal Networks (RPNs) **cite?,** significantly improving accuracy. However, their computational cost led to the rise of one-stage detectors such as **YOLO** full name (Redmon et al., 2016) and **SSD** again full name , which prioritize speed while maintaining accuracy.
 
-Mention https://github.com/hasanirtiza/Pedestron Pedestron as SOTA? 
-
 ### CNN-Based Detection Models
 
 Faster R-CNN became the baseline for pedestrian detection, with enhancements like Feature Pyramid Networks (FPN) improving small-object detection. Meanwhile, YOLO and SSD revolutionized real-time detection. RetinaNet (Lin et al., 2017) introduced **focal loss** which is?, enabling one-stage detectors to match two-stage accuracy. **Later versions like** later than? YOLOv4, YOLOv5, and YOLOv7 improved detection efficiency, making real-time pedestrian detection feasible. Recently, YOLOv8 further **refines** gpt word the YOLO family by adopting advanced backbone architectures and streamlined training procedures for improved accuracy-speed tradeoffs, demonstrating competitive results on pedestrian benchmarks. **last sentence is very gpt**
@@ -50,9 +48,35 @@ Faster R-CNN became the baseline for pedestrian detection, with enhancements lik
 
 DETR (Carion et al., 2020) introduced an end-to-end approach for pedestrian detection with transformers, removing the need for anchor boxes and post-processing steps like **NMS** full name. However, slow convergence and difficulty with small objects led to improvements such as Deformable DETR (Zhu et al., 2021), which uses multi-scale attention. Hybrid models like the Swin Transformer enhanced pedestrian detection by integrating hierarchical vision features. Real-Time DETR (RT-DETR) **addresses high computational overheads and latency in transformer-based detectors by employing lightweight attention and efficient decoder modules.** gpt As a result, RT-DETR offers promising real-time performance while retaining transformers' global context modeling advantages.
 
-### Datasets and Challenges
+## Datasets and State-of-the-Art Models
 
-Early benchmarks like Caltech Pedestrian and KITTI set the standard, but more diverse datasets like CityPersons (2017), EuroCity Persons (2018), and CrowdHuman (2018) improved generalization across environments. CrowdHuman, in particular, emphasized occlusion handling, a major challenge in pedestrian detection. Techniques like Bi-Box Regression and Repulsion Loss addressed overlapping pedestrians, improving recall in crowded scenes.
+A range of pedestrian detection datasets capture diverse conditions, from urban traffic to low-light or thermal imaging. The table below highlights key benchmarks and their current best-performing models:
+
+- **Caltech** → _LSFM_  
+  A pioneering large-scale dataset from urban driving scenarios, commonly used as a standard benchmark.
+
+- **CityPersons** → _DIW Loss_  
+  Derived from Cityscapes, emphasizing dense crowds and significant occlusions.
+
+- **LLVIP** → _MMPedestron_  
+  Focuses on low-light/nighttime scenes, necessitating specialized approaches.
+
+- **DVTOD** → _YOLOv6 (Thermal)_  
+  Infrared/thermal dataset showing how YOLO variants adapt to non-RGB domains.
+
+- **TJU-Ped-traffic** → _LSFM_  
+  Heavy-traffic settings with frequent occlusions, demanding robust detection.
+
+- **TJU-Ped-campus** → _EGCL_  
+  Campus-based scenarios testing generalization to semi-controlled environments.
+
+- **CVC14** → _CFT_  
+  Smaller, varied dataset evaluating adaptability across different conditions.
+
+- **MMPD-Dataset** → _MMPedestron_  
+  Emphasizes robust, specialized pedestrian detection across multiple challenges.
+
+These datasets and top-performing models illustrate the breadth of current pedestrian detection challenges and innovative solutions in the field.
 
 <!--
 ### Related research that we build upon:
