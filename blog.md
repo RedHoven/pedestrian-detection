@@ -1,4 +1,4 @@
-# Pedestrian Detection 
+# Pedestrian Detection
 
 <!-- ![alt text](Isolated.png "Title") -->
 
@@ -11,20 +11,22 @@ Pedestrian detection is a critical task in computer vision with significant real
 However, building a robust pedestrian detection system comes with its challenges. Variations in lighting, weather conditions, occlusions, and adversarial attacks pose significant challenges. Understanding and addressing them effectively is needed to developing reliable traffic systems.
 
 ## Our Approach:
-In our research we focus on three main areas: 
 
+In our research we focus on three main areas:
 
 ### 1. Transfer Learning
+
 Training deep learning models from scratch is computationally expensive and requires vast amounts of labeled data. Instead, we utilize transfer learning, where a pre-trained model (e.g., a convolutional neural network trained on ImageNet) is fine-tuned for pedestrian detection. This approach significantly reduces training time and improves performance, especially when labeled pedestrian data is limited. We also test the limits in how much data and computational power is needed to change the detection task to new classes.
 
 ### 2. Robustness
+
 Pedestrian detection models can be sensitive to variations in image data, including changes in lighting, weather conditions, image quality, and differences in human appearance. We evaluate how these models perform across diverse settings and explore strategies to increase their robustness.
 
 ### 3. Explainability
+
 A common criticism of deep learning models is their "black-box" nature. To address this, we analyze and visualize the layers of our pedestrian detection model to understand how it makes decisions.
 
-
-### Research questions: 
+### Research questions:
 
 1. How can pedestrian detection models be made more robust to variations in lighting, weather, and the environment?
 
@@ -36,14 +38,26 @@ A common criticism of deep learning models is their "black-box" nature. To addre
 
 ## Literature Review
 
-TODO 
+Pedestrian detection has evolved significantly with deep learning, transitioning from traditional methods (HOG+SVM, DPM) to CNN-based models. Two-stage detectors like Faster R-CNN (Ren et al., 2015) introduced Region Proposal Networks (RPNs), significantly improving accuracy. However, their computational cost led to the rise of one-stage detectors such as YOLO (Redmon et al., 2016) and SSD, which prioritize speed while maintaining accuracy.
 
-<!-- 
+### CNN-Based Detection Models
+
+Faster R-CNN became the baseline for pedestrian detection, with enhancements like Feature Pyramid Networks (FPN) improving small-object detection. Meanwhile, YOLO and SSD revolutionized real-time detection. RetinaNet (Lin et al., 2017) introduced focal loss, enabling one-stage detectors to match two-stage accuracy. Later versions like YOLOv4, YOLOv5, and YOLOv7 improved detection efficiency, making real-time pedestrian detection feasible. Recently, YOLOv8 further refines the YOLO family by adopting advanced backbone architectures and streamlined training procedures for improved accuracy-speed tradeoffs, demonstrating competitive results on pedestrian benchmarks.
+
+### Transformer-Based Models
+
+DETR (Carion et al., 2020) introduced an end-to-end approach for pedestrian detection with transformers, removing the need for anchor boxes and post-processing steps like NMS. However, slow convergence and difficulty with small objects led to improvements such as Deformable DETR (Zhu et al., 2021), which leverages multi-scale attention. Hybrid models like Swin Transformer further enhanced pedestrian detection by integrating hierarchical vision features. RT-DETR (Real-Time DETR) addresses high computational overheads and latency in transformer-based detectors by employing lightweight attention and efficient decoder modules. As a result, RT-DETR offers promising real-time performance while retaining the global context modeling advantages of transformers.
+
+### Datasets and Challenges
+
+Early benchmarks like Caltech Pedestrian and KITTI set the standard, but more diverse datasets like CityPersons (2017), EuroCity Persons (2018), and CrowdHuman (2018) improved generalization across environments. CrowdHuman, in particular, emphasized occlusion handling, a major challenge in pedestrian detection. Techniques like Bi-Box Regression and Repulsion Loss addressed overlapping pedestrians, improving recall in crowded scenes.
+
+<!--
 ### Related research that we build upon:
 
 how it's done now: what current typical approach(es)
-Yolo v8 finetune becase: 
-https://arxiv.org/pdf/2404.08081 
+Yolo v8 finetune becase:
+https://arxiv.org/pdf/2404.08081
 
 Fine tune DETR:
 https://arxiv.org/abs/2005.12872
@@ -85,8 +99,8 @@ The paper proposes constructing a versatile pedestrian knowledge bank by extract
 what is missing; what the problem is, and what consequences this problem has
 
 explainability - layers vizualization
-computationally heavy - trasfer learning trying to make it quick 
-advesial attacs - trying to make it robust 
+computationally heavy - trasfer learning trying to make it quick
+advesial attacs - trying to make it robust
 
 Other:
 Integrate promts to existing architecture
@@ -98,19 +112,18 @@ what you propose (e.g. explanation of what you're gonna implement but in words)
 2. Answer research questions
 3. Attempt a bigger model -->
 
-### Dataset
+## Dataset
 
 We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity-dataset.tudelft.nl/) benchmark as the data for fine-tuning and testing our models. ECP features street-level city images from a driver's point of view. The entire dataset contains images from all seasons and from 12 cities, with various weather conditions and from different parts of a day. The dataset includes both crowds and heavy occlusions. We decided to use the validation part because of its reasonable size for our experiments: 10 GB and 4266 image-label pairs. We randomly split the images and corresponding annotations from all the cities into train, validation, and test sets in 70-10-20 ratio.
 
-## Training 
+## Training
 
 We decided to fine-tune a pre-trained a YOLO model which show competitive predictive performance in pedestrian detection on images from city traffic cameras [link](https://arxiv.org/pdf/2404.08081). Additionally, we chose [what?] because it' s blablabla.
 
-### YOLO 
+### YOLO
 
 We used `YOLOv8l` model pre-trained on [COCO](https://cocodataset.org/#home) dataset for object detection. The model is vailable in [Ulitralitics PyPI package](https://pypi.org/project/ultralytics/). While newer versions were proposed, the 8th version still remains a strong baseline for pedestrian detection.
 
 We trained the model on 50 epochs with batch size of 16. To speed up the training, the images were resized to fit a 640x640 pixels square with a preserved aspect ratio. The rest of the image was padded with grey pixels.
 
 ### Other Model? Why?
-
