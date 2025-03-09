@@ -4,15 +4,13 @@
 
 <!-- why interesting or why people should care. -->
 
-## Why Pedestrian Detection is Important and Why You Should Care
+## Introduction
 
 Pedestrian detection is a critical task in computer vision with significant real-world implications. It is a fundamental component of autonomous driving, traffic monitoring, and smart surveillance systems. As urban areas become more congested and the number of vehicles on the road increases, ensuring pedestrian safety through intelligent vision systems is more important than ever. Pedestrian detection algorithms are essential for preventing accidents, improving traffic flow, and enhancing the safety of vulnerable road users.
 
 However, building a robust pedestrian detection system comes with its challenges. Variations in lighting, weather conditions, occlusions, and adversarial attacks pose significant challenges. Understanding and addressing them effectively is needed to developing reliable traffic systems.
 
-## Our Approach:
-
-In our research we focus on three main areas:
+In our research, we focus on three main areas:
 
 ### 1. Transfer Learning
 
@@ -26,15 +24,17 @@ Pedestrian detection models can be sensitive to variations in image data, includ
 
 A common criticism of deep learning models is their "black-box" nature. To address this, we analyze and visualize the layers of our pedestrian detection model to understand how it makes decisions.
 
-### Research questions:
+### Research questions
+
+To address the three research areas we pose the following research questions:
 
 1. How can pedestrian detection models be made more robust to variations in lighting, weather, and the environment?
 
 2. How can knowledge from pedestrian detection in road scenes be effectively transferred to other settings and object categories, such as road signs?
 
-3. How can layers visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
+3. How can layer visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
 
-<!-- 346 WORDS -->
+
 
 ## Literature Review
 
