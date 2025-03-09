@@ -49,6 +49,9 @@ Fine tune DETR:
 https://arxiv.org/abs/2005.12872
 (here they user RL-DETR-L, we are going to use rtdetr_r50vd)
 
+and this is why:
+https://openaccess.thecvf.com/content/CVPR2024/papers/Zhao_DETRs_Beat_YOLOs_on_Real-time_Object_Detection_CVPR_2024_paper.pdf
+
 PED is pedestrian DETR:
 https://arxiv.org/pdf/2012.06785
 
