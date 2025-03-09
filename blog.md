@@ -42,7 +42,7 @@ Pedestrian detection has evolved significantly with deep learning, transitioning
 
 ### CNN-Based Detection Models
 
-Faster R-CNN became the baseline for pedestrian detection, with enhancements like Feature Pyramid Networks (FPN) improving small-object detection. Meanwhile, YOLO and SSD revolutionized real-time detection. RetinaNet (Lin et al., 2017) introduced focal loss, enabling one-stage detectors to match two-stage accuracy. Later versions like YOLOv4, YOLOv5, and YOLOv7 improved detection efficiency, making real-time pedestrian detection feasible. Recently, YOLOv8 further refines the YOLO family by adopting advanced backbone architectures and streamlined training procedures for improved accuracy-speed tradeoffs, demonstrating competitive results on pedestrian benchmarks.
+Faster R-CNN became the baseline for pedestrian detection, with enhancements like Feature Pyramid Networks (FPN) improving small-object detection. Meanwhile, YOLO and SSD [TODO: citation] revolutionized real-time detection. RetinaNet (Lin et al., 2017) introduced focal loss, enabling one-stage detectors to match two-stage accuracy. Later versions like YOLOv4, YOLOv5, and YOLOv7 improved detection efficiency, making real-time pedestrian detection feasible. Recently, YOLOv8 further refines the YOLO family by adopting advanced backbone architectures and streamlined training procedures for improved accuracy-speed tradeoffs, demonstrating competitive results on pedestrian benchmarks.
 
 ### Transformer-Based Models
 
@@ -118,7 +118,7 @@ We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity
 
 ## Training
 
-We decided to fine-tune a pre-trained a YOLO model which show competitive predictive performance in pedestrian detection on images from city traffic cameras [link](https://arxiv.org/pdf/2404.08081). Additionally, we chose [what?] because it' s blablabla.
+We decided to fine-tune pre-trained YOLOv8 and RT-DETR large models which show competitive predictive performance in pedestrian detection on images from city traffic cameras [link](https://arxiv.org/pdf/2404.08081).
 
 ### YOLO
 
