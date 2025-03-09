@@ -34,7 +34,7 @@ To address the three research areas we pose the following research questions:
 
 3. How can layer visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
 
-
+In our project, we compare two real-time detection models that show promising results on other datasets. We start this blog post with a literature review followed by a dataset and model description. After that, we present the training setup and describe the experimental approach. In the results section, we focus on the experiments findings. Finally, we discuss the results and conclude the blog post. 
 
 ## Literature Review
 
