@@ -4,15 +4,13 @@
 
 <!-- why interesting or why people should care. -->
 
-## Why Pedestrian Detection is Important and Why You Should Care
+## Introduction
 
 Pedestrian detection is a critical task in computer vision with significant real-world implications. It is a fundamental component of autonomous driving, traffic monitoring, and smart surveillance systems. As urban areas become more congested and the number of vehicles on the road increases, ensuring pedestrian safety through intelligent vision systems is more important than ever. Pedestrian detection algorithms are essential for preventing accidents, improving traffic flow, and enhancing the safety of vulnerable road users.
 
 However, building a robust pedestrian detection system comes with its challenges. Variations in lighting, weather conditions, occlusions, and adversarial attacks pose significant challenges. Understanding and addressing them effectively is needed to developing reliable traffic systems.
 
-## Our Approach:
-
-In our research we focus on three main areas:
+In our research, we focus on three main areas:
 
 ### 1. Transfer Learning
 
@@ -26,15 +24,17 @@ Pedestrian detection models can be sensitive to variations in image data, includ
 
 A common criticism of deep learning models is their "black-box" nature. To address this, we analyze and visualize the layers of our pedestrian detection model to understand how it makes decisions.
 
-### Research questions:
+### Research questions
+
+To address the three research areas we pose the following research questions:
 
 1. How can pedestrian detection models be made more robust to variations in lighting, weather, and the environment?
 
 2. How can knowledge from pedestrian detection in road scenes be effectively transferred to other settings and object categories, such as road signs?
 
-3. How can layers visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
+3. How can layer visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
 
-<!-- 346 WORDS -->
+In our project, we compare two real-time detection models that show promising results on other datasets. We start this blog post with a literature review followed by a dataset and model description. After that, we present the training setup and describe the experimental approach. In the results section, we focus on the experiments findings. Finally, we discuss the results and conclude the blog post. 
 
 ## Literature Review
 
@@ -42,11 +42,11 @@ Pedestrian detection has evolved significantly with deep learning, transitioning
 
 ### CNN-Based Detection Models
 
-Faster R-CNN became the baseline for pedestrian detection, with enhancements like Feature Pyramid Networks (FPN) improving small-object detection. Meanwhile, YOLO and SSD revolutionized real-time detection. RetinaNet (Lin et al., 2017) introduced **focal loss** which is?, enabling one-stage detectors to match two-stage accuracy. **Later versions like** later than? YOLOv4, YOLOv5, and YOLOv7 improved detection efficiency, making real-time pedestrian detection feasible. Recently, YOLOv8 further **refines** gpt word the YOLO family by adopting advanced backbone architectures and streamlined training procedures for improved accuracy-speed tradeoffs, demonstrating competitive results on pedestrian benchmarks. **last sentence is very gpt**
+Faster R-CNN established a strong foundation for pedestrian detection, with innovations like Feature Pyramid Networks (FPN) enhancing its ability to detect small objects. RetinaNet introduced focal loss, a technique that addresses class imbalance by down-weighting easy, correctly classified examples, thereby focusing training on harder, misclassified ones. This advancement enabled one-stage detectors to achieve accuracy levels comparable to two-stage models. The You Only Look Once (YOLO) family models further improved detection efficiency, making real-time pedestrian detection more practical. This is made possible by introducing anchor boxes to handle various object sizes and shapes better and adopting advanced backbone networks like Darknet-53 to improve feature extraction and detection accuracy.
 
 ### Transformer-Based Models
 
-DETR (Carion et al., 2020) introduced an end-to-end approach for pedestrian detection with transformers, removing the need for anchor boxes and post-processing steps like **NMS** full name. However, slow convergence and difficulty with small objects led to improvements such as Deformable DETR (Zhu et al., 2021), which uses multi-scale attention. Hybrid models like the Swin Transformer enhanced pedestrian detection by integrating hierarchical vision features. Real-Time DETR (RT-DETR) **addresses high computational overheads and latency in transformer-based detectors by employing lightweight attention and efficient decoder modules.** gpt As a result, RT-DETR offers promising real-time performance while retaining transformers' global context modeling advantages.
+Detection Transformer (DETR) introduced by Carion et al. (2020) presented an end-to-end object detection framework utilizing transformers, eliminating the need for anchor boxes and post-processing steps like Non-Maximum Suppression (NMS). However, challenges such as slow convergence and difficulties in detecting small objects led to the development of Deformable DETR by Zhu et al. (2021), which incorporated multi-scale attention mechanisms to address these issues. Subsequent hybrid models, including the Swin Transformer, enhanced pedestrian detection by integrating hierarchical vision features. To tackle high computational overheads and latency in transformer-based detectors, Real-Time Detection Transformer (RT-DETR) employs a hybrid encoder that efficiently processes multi-scale features and utilizes IoU-aware query selection to improve object query initialization. As a result, RT-DETR offers promising real-time performance while retaining the global context modeling advantages of transformers.
 
 ## Datasets and State-of-the-Art Models
 
