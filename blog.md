@@ -52,6 +52,8 @@ DETR (Carion et al., 2020) introduced an end-to-end approach for pedestrian dete
 
 A range of pedestrian detection datasets capture diverse conditions, from urban traffic to low-light or thermal imaging. The table below highlights key benchmarks and their current best-performing models:
 
+todo: clean this
+
 - **Caltech** → _LSFM_  
   A pioneering large-scale dataset from urban driving scenarios, commonly used as a standard benchmark.
 
@@ -140,36 +142,32 @@ what you propose (e.g. explanation of what you're gonna implement but in words)
 
 ## Dataset
 
-We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity-dataset.tudelft.nl/) benchmark as the data for fine-tuning and testing our models. ECP features street-level city images from a driver's point of view. The entire dataset contains images from all seasons and from 12 cities, with various weather conditions and from different parts of a day. The dataset includes both crowds and heavy occlusions. We decided to use the validation part because of its reasonable size for our experiments: 10 GB and 4266 image-label pairs. We randomly split the images and corresponding annotations from all the cities into train, validation, and test sets in 70-10-20 ratio.
+We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity-dataset.tudelft.nl/) benchmark as the data for fine-tuning and testing our models. ECP features street-level city images from a driver's point of view. The entire dataset contains images from all seasons and 12 cities, with various weather conditions and from different parts of the day. The dataset includes both crowds and heavy occlusions. Given the large scale of the dataset, we decided to focus only on the validation part for our experiments: 10 GB and 4266 image-label pairs. We randomly split the images and corresponding annotations from all the cities into the train, validation, and test sets in a 70-10-20 ratio.
 
-## Training
+## Model Training
+Pedestrian detection requires fast, real-time, lightweight yet effective models.
+[sadik2024realtimedetectionanalysisvehicles](will insert bibtex citation here later) presented a comparison between YOLOv8 and RT-DETR models in pedestrian detection on images from city traffic cameras. YOLOv8 [yolov8_ultralytics](will insert bibtex citation here later) is a lightweight CNN-based model suitable for real-time detection. RT-DETR [lv2023detrs](will insert bibtex citation here later) is an end-to-end model for object detection with efficient attention-based encoder and decoder architecture. Both models showed competitive performance with YOLOv8 leading slightly on all metrics. 
 
-We decided to fine-tune pre-trained YOLOv8 and RT-DETR large models which show competitive predictive performance in pedestrian detection on images from city traffic cameras [link](https://arxiv.org/pdf/2404.08081).
+Similar results, fundamental architectural differences and the real-time nature of both models make them interesting competing candidates for the pedestrian detection task on images taken from a car and for subsequent experiments. [Ulitralytics PyPI package](https://pypi.org/project/ultralytics/) offers both `YOLOv8` and `RT-DETR` models pre-trained on COCO 2017 dataset for object detection [lin2015microsoft](will insert bibtex citation here later). Although the dataset contains a label for people, it also contains 79 other diverse labels. We narrow down the capabilities of the models by fine-tuning them on a subset from the ECP validation dataset. To compare the models in fair conditions, we decided to use the models of large size (`YOLOv8`, `RT-DETR-L`) and give each model 2.5 hours of fine-tuning time with a Tesla P100 GPU.
 
-### YOLO
-
-We fine-tuned a `YOLOv8l` model pre-trained on [COCO](https://cocodataset.org/#home) dataset for object detection. The model is vailable in [Ulitralitics PyPI package](https://pypi.org/project/ultralytics/). While newer versions were proposed, the 8th version still remains a strong baseline for pedestrian detection. Morover, it was mentioned in the paper.
-
-We trained the model on 50 epochs with batch size of 16. To speed up the training, the images were resized to fit a 640x640 pixels square with a preserved aspect ratio. The rest of the image was padded with grey pixels.
-
-### RT-DETR
+We trained the models for 50 epochs with a batch size of 16. To speed up the training, the images were resized to fit a 640x640 pixels square with a preserved aspect ratio. The rest of the image was dynamically padded with grey pixels to fill in the square. The rest of the parameters were set to [default](https://docs.ultralytics.com/modes/train/#augmentation-settings-and-hyperparameters). A default data augmentation was applied with the most notable being HSV colour adjustments, mosaic composition, image erasing, and croping.
 
 ## Results 
 
-In this section, we compare the predictive performance of `YOLOv8l` and `RT-DETR-l` models using standard object detection evaluation metrics. The results below summarize their strengths in terms of precision, recall, and mean average precision (mAP). The best results per metric are highlighted in bold.
+We compare the predictive performance of `YOLOv8l` and `RT-DETR-L` models using standard object detection evaluation metrics: precision, recall, f1-score and mean average precision (mAP) for different intersection over union (IoU) thresholds. The best result per metric is shown in bold.
 
 | Metric                                      | YOLOv8  | RT-DETR |
-|---------------------------------------------|--------|---------|
-| Average Precision (AP)                  | 0.4546 | **0.4551**  |
-| AP at IoU = 0.50                         | 0.7273 | **0.7628**  |
-| Mean Average Precision (mAP)            | 0.4546 | **0.4551**  |
-| mAP at IoU = 0.50                        | 0.7273 | **0.7628**  |
-| mAP at IoU = 0.75                        | **0.4776** | 0.4679  |
-| Mean AP for Different IoU Thresholds     | 0.4546 | **0.4551**  |
-| Mean Precision                           | **0.8129** | 0.8033  |
-| Precision                                | **0.8129** | 0.8033  |
-| Recall                                   | 0.6514 | **0.6706**  |
+|---------------------------------------------|--------|----------|
+| mAP at 0.05-0.95 IoU                      | 0.4546 | **0.4551**   |
+| mAP at 0.50 IoU                           | 0.7273 | **0.7628**  |
+| mAP at 0.75 IoU                           | **0.4776** | 0.4679  |
+| Precision                                 | **0.8129** | 0.8033  |
+| Recall                                    | 0.6514 | **0.6706**  |
+| F1-score                                  | 0.7233 | **0.7310** |
 
-RT-DETR achieves a slightly higher AP and mAP, particularly at IoU = 0.50, suggesting better overall detection performance. However, YOLO performs slightly better at IoU = 0.75, indicating stronger localization accuracy under stricter overlap conditions. In terms of recall, RT-DETR detects more true positives (0.6706 vs. 0.6514), which can reduce the number of missed detections. On the other hand, YOLO maintains a slightly higher precision (0.8129 vs. 0.8033), meaning it produces fewer false positives compared to RT-DETR.  
 
-Overall, RT-DETR demonstrates better recall and consistency across different IoU thresholds, while YOLO maintains strong precision and localization accuracy at higher thresholds. The choice between these models depends on the specific task requirements—whether prioritizing detection coverage or minimizing false positives is more important.
+The mean average precision (mAP) at 0.05-0.95 IoU thresholds is nearly identical for both models, with RT-DETR being slightly better. In the case of mAP at 0.50 IoU, RT-DETR shows a slightly superior predictive performance (0.7628 vs. 0.7273). However, for mAP at 0.75 IoU, YOLOv8 achieves a higher value (0.4776 vs. 0.4679). This suggests that YOLOv8 is more effective at pinpointing people with higher localization accuracy while RT-DETR is more effective at globally identifying pedestrians with more relaxed thresholds.
+
+In terms of precision, YOLOv8 outperforms RT-DETR (0.8129 vs. 0.8033), meaning it generates fewer boxes with no people on average. However, RT-DETR achieves a higher recall (0.6706 vs. 0.6514) that shows the model's generally better ability to identify pedestrians. The precision-recall trade-off is reflected in the F1-score, where the results are on par with RT-DETR leading by a small margin.
+
+Overall, the results show RT-DETR leads in terms of recall and general detection performance (mAP at 0.05-0.95) which makes it a better candidate for detecting people in crowded areas. In contrast, YOLOv8 surpasses RT-DETR in more precise pedestrian detection, according to precision and mAP at 0.75, making it a good fit for a more accurate localization of detected people.
