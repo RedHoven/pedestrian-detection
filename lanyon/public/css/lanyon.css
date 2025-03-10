@@ -202,11 +202,7 @@ a.sidebar-nav-item:focus {
 
 /* Hide the sidebar checkbox that we toggle with `.sidebar-toggle` */
 .sidebar-checkbox {
-  position: absolute;
-  opacity: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  display: none;
 }
 
 /* Style the `label` that we use to target the `.sidebar-checkbox` */
@@ -535,12 +531,17 @@ a.pagination-item:hover {
 /* TUDelft */
 .theme-base-tudelft .sidebar,
 .theme-base-tudelft .sidebar-toggle:active,
-.theme-base-tudelft #sidebar-checkbox:checked ~ .sidebar-toggle {
+.theme-base-tudelft #sidebar-checkbox:checked ~ .sidebar-toggle{
   background-color: #0C2340;
 }
 .theme-base-tudelft .container a,
 .theme-base-tudelft .sidebar-toggle,
 .theme-base-tudelft .related-posts li a:hover {
+  color: #00A6D6;
+}
+
+.theme-base-tudelft code,
+.theme-base-tudelft .site-title {
   color: #0076C2;
 }
 
