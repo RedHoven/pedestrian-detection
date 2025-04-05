@@ -3,8 +3,8 @@ title:               Computer Vision Project | Group 1
 description:         'Group 1: Pedestrian Detection. How can we ensure robust and safe pedestrian detection in a variety of environments?'
 paginate:            1
 permalink:           pretty
-url:                 'https://cv-project-group1.github.io/'
-baseurl:             'computer-vision-group-project/'
+url:                 'https://cv-project-group1.github.io'
+baseurl:             '/computer-vision-group-project'
 
 # Gems
 plugins:
