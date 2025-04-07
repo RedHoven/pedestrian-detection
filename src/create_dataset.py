@@ -6,9 +6,9 @@ import shutil
 import random
 
 # Paths
-image_dir = "datasets/ECP/day/img/val/"
-labels_dir = "datasets/ECP/day/labels/val/"
-updated_labels_dir = "datasets/ECP/day/updated_labels/val/"
+image_dir = "../datasets/ECP/day/img/val/"
+labels_dir = "../datasets/ECP/day/labels/val/"
+updated_labels_dir = "../datasets/ECP/day/updated_labels/val/"
 
 # Ensure output directory exists
 os.makedirs(updated_labels_dir, exist_ok=True)

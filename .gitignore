@@ -87,4 +87,5 @@ htmlcov/
 # Project specific
 datasets/
 training/
+results/
 _site/
