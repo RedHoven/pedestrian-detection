@@ -1,5 +1,6 @@
 import argparse
 import json
+import random
 import numpy as np
 import glob
 import cv2
@@ -507,11 +508,11 @@ class ExplainabilityFramework:
 
                 # YOLOv8 CAM
                 axes[i, 1].imshow(cam_yolo)
-                # self._add_pred_boxes(axes[i, 1], yolo_preds, img.shape)
+                self._add_pred_boxes(axes[i, 1], yolo_preds, img.shape)
 
                 # RT-DETR CAM
                 axes[i, 2].imshow(cam_rtdetr)
-                # self._add_pred_boxes(axes[i, 2], rtdetr_preds, img.shape)
+                self._add_pred_boxes(axes[i, 2], rtdetr_preds, img.shape)
             else:
                 axes[i, 0].imshow(img)
                 axes[i, 1].imshow(img)
@@ -556,8 +557,8 @@ if __name__ == "__main__":
     
     experiments_dir = "../datasets/visualization_samples"
     label_dir = "../datasets/ecp_dataset/labels/test/"
-    results_dir = f"results"
-    categories = ["empty", "low_complexity", "medium_complexity", "high_complexity"]
+    results_dir = f"../results"
+    categories = ["empty", "low_complexity", "medium_complexity", "high_complexity", "interesting"]
     category_mapping = {cat: glob.glob(f"{experiments_dir}/{cat}/*") for cat in categories}
 
     img_path = category_mapping[categories[3]][2]
@@ -568,12 +569,21 @@ if __name__ == "__main__":
     print(f"Image: {img_name}")
     print(f"Label: {label_path}")
 
-    img_paths = category_mapping["empty"][:10] + category_mapping["low_complexity"][:10] + category_mapping["medium_complexity"] + category_mapping["high_complexity"]
+    # img_paths = category_mapping["low_complexity"][:3]
+    # label_paths = [find_label_for_image(os.path.basename(img), os.path.dirname(img), label_dir) for img in img_paths]
+    # framework.visualize_grid(
+    #     img_paths,
+    #     label_paths,
+    #     None,
+    #     save_path=os.path.join(results_dir, f"low_grid_{args.grid}.png")
+    # )
 
-    complexity_report = "high_complexity"
+    img_paths = category_mapping["interesting"]
+    label_paths = [find_label_for_image(os.path.basename(img), os.path.dirname(img), label_dir) for img in img_paths]
+
     framework.visualize_grid(
-        category_mapping[complexity_report][:3],
-        [find_label_for_image(os.path.basename(img), f"{experiments_dir}/{complexity_report}", label_dir) for img in category_mapping[complexity_report][:3]],
-        [complexity_report] * len(category_mapping[complexity_report][:3]),
-        save_path=os.path.join(results_dir, f"grid_{args.grid}.png")
+        img_paths,
+        label_paths,
+        None,
+        save_path=os.path.join(results_dir, f"report_grid_{args.grid}.png")
     )
