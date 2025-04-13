@@ -1,106 +1,180 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toc = document.getElementById("toc");
-  if (!toc) return;
-
-  // Get all h1, h2, and h3 headings.
-  const headings = Array.from(document.body.querySelectorAll("h1, h2, h3"));
-
-  // Skip the first two h1 elements
-  let hCount = 0;
-  const tocItems = [];
-  const idPrefix = "toc_";
-
-  headings.forEach((heading, index) => {
-    hCount++;
-    if (hCount <= 2) return;
-
-    const level = parseInt(heading.tagName.slice(1));
-    const text = heading.textContent.trim();
-    const id = heading.id || `${idPrefix}${index}`;
-    heading.id = id;
-    tocItems.push({ id, text, level });
-  });
-
-  // Build nested TOC
-  function buildTOC(items) {
-    let html = "";
-    let levelStack = [];
-
-    items.forEach(({ id, text, level }) => {
-      while (levelStack.length && levelStack[levelStack.length - 1] >= level) {
-        html += "</li></ul>";
-        levelStack.pop();
-      }
-      html += `<li><a href="#${id}">${text}</a><ul>`;
-      levelStack.push(level);
-    });
-
-    while (levelStack.length) {
-      html += "</li></ul>";
-      levelStack.pop();
-    }
-
-    return `<ul>${html}</ul>`;
+  if (!toc) {
+    console.error("TOC container not found");
+    return;
   }
 
-  toc.innerHTML = buildTOC(tocItems);
-
-  const sections = tocItems.map(({ id }) => document.getElementById(id));
-
-  // Activate ToC items on scroll
-  const activateTOC = () => {
-    const scrollPosition = window.scrollY || window.pageYOffset;
-    const offset = 150;
-    let activeItem = null;
-
-    for (let i = 0; i < sections.length; i++) {
-      if (sections[i].offsetTop <= scrollPosition + offset) {
-        activeItem = tocItems[i];
-      } else {
-        break;
-      }
-    }
-
-    // Reset all classes
-    toc.querySelectorAll("li").forEach(li => {
-      li.classList.remove("active", "expanded");
+  // Get all h1, h2, and h3 headings (skip first two h1 elements)
+  const headings = Array.from(document.querySelectorAll("h1, h2, h3"))
+    .filter((heading, index) => {
+      return !(heading.tagName === "H1" && index < 2);
     });
 
-    if (activeItem) {
-      const activeLink = toc.querySelector(`a[href="#${activeItem.id}"]`);
-      if (activeLink) {
-        // Only mark the current section's li as active
-        activeLink.parentElement.classList.add("active");
+  // Generate TOC items with unique IDs
+  const tocItems = headings.map((heading, index) => {
+    const id = heading.id || `toc-${index}`;
+    heading.id = id;
+    return {
+      id,
+      text: heading.textContent.trim(),
+      level: parseInt(heading.tagName.substring(1))
+    };
+  });
 
-        // Expand all ancestor li elements
-        let parentLi = activeLink.closest("li").parentElement.closest("li");
-        while (parentLi) {
-          parentLi.classList.add("expanded");
-          parentLi = parentLi.parentElement.closest("li");
+  // Group items by their parent h1
+  const h1Groups = [];
+  let currentGroup = null;
+
+  tocItems.forEach(item => {
+    if (item.level === 1) {
+      currentGroup = { h1: item, children: [] };
+      h1Groups.push(currentGroup);
+    } else if (currentGroup) {
+      currentGroup.children.push(item);
+    }
+  });
+
+  // Build the TOC HTML structure
+  function buildTOC(groups) {
+    let html = "<ul class='toc-root'>";
+    
+    groups.forEach(group => {
+      html += `
+        <li class="h1-section">
+          <a href="#${group.h1.id}" class="toc-link">${group.h1.text}</a>
+          <ul class="h1-children">`;
+      
+      let levelStack = [1]; // Track nesting levels
+      
+      group.children.forEach(item => {
+        while (levelStack.length && levelStack[levelStack.length - 1] >= item.level) {
+          html += "</ul></li>";
+          levelStack.pop();
+        }
+        
+        html += `
+          <li>
+            <a href="#${item.id}" class="toc-link">${item.text}</a>
+            <ul>`;
+        levelStack.push(item.level);
+      });
+      
+      // Close remaining tags
+      while (levelStack.length > 1) {
+        html += "</ul></li>";
+        levelStack.pop();
+      }
+      
+      html += `</ul></li>`;
+    });
+    
+    return html + "</ul>";
+  }
+
+  toc.innerHTML = buildTOC(h1Groups);
+  const tocLinks = toc.querySelectorAll(".toc-link");
+  const h1Sections = toc.querySelectorAll(".h1-section");
+
+  // Recursively expand all children of an element
+  function expandAllChildren(element) {
+    const uls = element.querySelectorAll("ul");
+    uls.forEach(ul => {
+      ul.style.display = "block";
+      const parentLi = ul.closest("li");
+      if (parentLi) parentLi.classList.add("expanded");
+    });
+  }
+
+  // TOC activation logic
+  function activateTOC() {
+    const scrollPosition = window.scrollY + 100; // Activation offset
+    let activeId = null;
+    let closestDistance = Infinity;
+    let activeIsH1 = false;
+
+    // Find the heading closest to but above the scroll position
+    tocItems.forEach(item => {
+      const element = document.getElementById(item.id);
+      if (element) {
+        const distance = element.offsetTop - scrollPosition;
+        if (distance <= 0 && Math.abs(distance) < Math.abs(closestDistance)) {
+          closestDistance = distance;
+          activeId = item.id;
+          activeIsH1 = (item.level === 1);
+        }
+      }
+    });
+
+    // Reset all active states and collapse all h1 sections
+    tocLinks.forEach(link => {
+      link.classList.remove("active");
+    });
+    h1Sections.forEach(section => {
+      section.classList.remove("expanded");
+      const childUl = section.querySelector(".h1-children");
+      if (childUl) childUl.style.display = "none";
+    });
+
+    // Set new active state
+    if (activeId) {
+      const activeLink = toc.querySelector(`a[href="#${activeId}"]`);
+      if (activeLink) {
+        activeLink.classList.add("active");
+
+        // Handle the containing h1 section
+        const containingH1 = activeLink.closest(".h1-section");
+        if (containingH1) {
+          containingH1.classList.add("expanded");
+          const childUl = containingH1.querySelector(".h1-children");
+          if (childUl) {
+            childUl.style.display = "block";
+            // If this is the active h1, expand all its children recursively
+            if (activeIsH1) {
+              expandAllChildren(containingH1);
+            }
+          }
+        }
+
+        // For non-h1 items, expand their entire parent chain
+        if (!activeIsH1) {
+          let parent = activeLink.parentElement;
+          while (parent && !parent.classList.contains("toc-root")) {
+            if (parent.tagName === "LI") {
+              parent.classList.add("expanded");
+              const childUl = parent.querySelector("> ul");
+              if (childUl) {
+                childUl.style.display = "block";
+                // Expand all children of parent elements
+                expandAllChildren(parent);
+              }
+            }
+            parent = parent.parentElement;
+          }
         }
       }
     }
-  };
+  }
 
+  // Initialize and set up events
   window.addEventListener("scroll", activateTOC);
-  activateTOC(); // On load
+  activateTOC(); // Initial activation
+
+  // Toggle functionality for mobile
   const toggleBtn = document.getElementById("toc-toggle");
   const tocContainer = document.getElementById("toc-container");
 
-  toggleBtn.addEventListener("click", () => {
-    tocContainer.classList.toggle("visible");
-    tocContainer.classList.toggle("hidden");
-  });
+  if (toggleBtn && tocContainer) {
+    toggleBtn.addEventListener("click", () => {
+      tocContainer.classList.toggle("visible");
+    });
 
-  document.addEventListener("click", (e) => {
-    if (
-      window.innerWidth <= 768 &&
-      tocContainer.classList.contains("visible") &&
-      !tocContainer.contains(e.target) &&
-      !toggleBtn.contains(e.target)
-    ) {
-      tocContainer.classList.remove("visible");
-      tocContainer.classList.add("hidden");
-    }
-  });
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768 &&
+          !tocContainer.contains(e.target) &&
+          !toggleBtn.contains(e.target)) {
+        tocContainer.classList.remove("visible");
+      }
+    });
+  }
 });
