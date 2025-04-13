@@ -1,0 +1,61 @@
+/* Overall container (kept fixed on the right) */
+#toc-container {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    width: 250px;
+    max-height: 75vh;
+    overflow-y: auto;
+    background: transparent; /* Transparent background */
+    border: none;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 14px;
+    z-index: 999;
+  }
+  
+  /* Base ToC styling */
+  #toc {
+    padding: 8px;
+  }
+  
+  /* Remove default bullet styling */
+  #toc ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 12px;
+  }
+  
+  /* Hide all nested lists (for headings after top level) */
+  #toc ul ul {
+    display: none;
+  }
+  
+  /* Show nested lists if the parent li has the active class */
+  #toc li.active > ul {
+    display: block;
+  }
+  
+  /* Styling for list items and links */
+  #toc li {
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  
+  #toc a {
+    text-decoration: none;
+    color: #444;
+    transition: color 0.2s ease;
+  }
+  
+  #toc a:hover {
+    text-decoration: underline;
+    color: #000;
+  }
+  
+  /* When a link is active, make it bold */
+  #toc li.active > a {
+    font-weight: bold;
+    color: #111;
+  }
+  
