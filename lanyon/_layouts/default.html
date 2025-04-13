@@ -7,6 +7,17 @@
 
     {% include sidebar.html %}
 
+    <div id="toc-container" class="overlay hidden">
+      <nav id="toc"></nav>
+    </div>
+    
+    <button id="toc-toggle" aria-label="Toggle ToC">
+      <!-- Small "hamburger list" SVG icon -->
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>    
+
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
          content to avoid any CSS collisions with our real content. -->
     <div class="wrap">
@@ -18,10 +29,12 @@
         </div>
       </div>
 
+    <a id="top"></a>
       <div class="container content">
         {{ content }}
       </div>
     </div>
+    <a id="bottom"></a>
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
