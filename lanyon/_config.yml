@@ -6,8 +6,6 @@ permalink:           pretty
 url:                 'https://cv-project-group1.github.io'
 baseurl:             '/computer-vision-group-project'
 
-google_analytics_id: G-HX4JMVPPWK
-
 # Gems
 plugins:
   - jekyll-paginate

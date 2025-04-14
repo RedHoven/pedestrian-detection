@@ -75,7 +75,7 @@
   }
   
   /* === Mobile overlay styles === */
-  @media (max-width: 768px) {
+  @media (max-width: 1250px) {
     #toc-container {
       display: none;
       opacity: 0;

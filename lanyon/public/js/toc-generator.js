@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", (e) => {
-      if (window.innerWidth <= 768 &&
+      if (window.innerWidth <= 1250 &&
           !tocContainer.contains(e.target) &&
           !toggleBtn.contains(e.target)) {
         tocContainer.classList.remove("visible");
