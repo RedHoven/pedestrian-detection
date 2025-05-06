@@ -1,10 +1,10 @@
 # Setup
-title:               Computer Vision Project | Group 1
+title:               Pedestrian Detection | TU Delft  
 description:         'Group 1: Pedestrian Detection. How can we ensure robust and safe pedestrian detection in a variety of environments?'
+github:             'https://github.com/RedHoven/pedestrian-detection'
 paginate:            1
 permalink:           pretty
-url:                 'https://cv-project-group1.github.io'
-baseurl:             '/computer-vision-group-project'
+baseurl:             '/pedestrian-detection'
 
 # Gems
 plugins:
@@ -14,3 +14,7 @@ markdown: kramdown
 kramdown:
   input: GFM
   math_engine: mathjax
+
+  include:
+  - public/models/yolov8.onnx
+  - public/models/rtdetr.onnx
