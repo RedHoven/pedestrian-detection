@@ -1,53 +1,98 @@
-# Pedestrian Detection 
+# Pedestrian Detection
 
 <!-- ![alt text](Isolated.png "Title") -->
 
 <!-- why interesting or why people should care. -->
 
-## Why Pedestrian Detection is Important and Why You Should Care
+## Introduction
 
 Pedestrian detection is a critical task in computer vision with significant real-world implications. It is a fundamental component of autonomous driving, traffic monitoring, and smart surveillance systems. As urban areas become more congested and the number of vehicles on the road increases, ensuring pedestrian safety through intelligent vision systems is more important than ever. Pedestrian detection algorithms are essential for preventing accidents, improving traffic flow, and enhancing the safety of vulnerable road users.
 
 However, building a robust pedestrian detection system comes with its challenges. Variations in lighting, weather conditions, occlusions, and adversarial attacks pose significant challenges. Understanding and addressing them effectively is needed to developing reliable traffic systems.
 
-## Our Approach:
-In our research we focus on three main areas: 
-
+In our research, we focus on three main areas:
 
 ### 1. Transfer Learning
+
 Training deep learning models from scratch is computationally expensive and requires vast amounts of labeled data. Instead, we utilize transfer learning, where a pre-trained model (e.g., a convolutional neural network trained on ImageNet) is fine-tuned for pedestrian detection. This approach significantly reduces training time and improves performance, especially when labeled pedestrian data is limited. We also test the limits in how much data and computational power is needed to change the detection task to new classes.
 
 ### 2. Robustness
+
 Pedestrian detection models can be sensitive to variations in image data, including changes in lighting, weather conditions, image quality, and differences in human appearance. We evaluate how these models perform across diverse settings and explore strategies to increase their robustness.
 
 ### 3. Explainability
+
 A common criticism of deep learning models is their "black-box" nature. To address this, we analyze and visualize the layers of our pedestrian detection model to understand how it makes decisions.
 
+### Research questions
 
-### Research questions: 
+To address the three research areas we pose the following research questions:
 
 1. How can pedestrian detection models be made more robust to variations in lighting, weather, and the environment?
 
 2. How can knowledge from pedestrian detection in road scenes be effectively transferred to other settings and object categories, such as road signs?
 
-3. How can layers visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
+3. How can layer visualization techniques improve the interpretability and explainability of convolutional networks for pedestrian detection models?
 
-<!-- 346 WORDS -->
+In our project, we compare two real-time detection models that show promising results on other datasets. We start this blog post with a literature review followed by a dataset and model description. After that, we present the training setup and describe the experimental approach. In the results section, we focus on the experiments findings. Finally, we discuss the results and conclude the blog post. 
 
 ## Literature Review
 
-TODO 
+Pedestrian detection has evolved significantly with deep learning, transitioning from traditional methods **(HOG+SVM, DPM)** do not use short version for the first time to CNN-based models. Two-stage detectors like Faster R-CNN (Ren et al., 2015) introduced Region Proposal Networks (RPNs) **cite?,** significantly improving accuracy. However, their computational cost led to the rise of one-stage detectors such as **YOLO** full name (Redmon et al., 2016) and **SSD** again full name , which prioritize speed while maintaining accuracy.
 
-<!-- 
+### CNN-Based Detection Models
+
+Faster R-CNN established a strong foundation for pedestrian detection, with innovations like Feature Pyramid Networks (FPN) enhancing its ability to detect small objects. RetinaNet introduced focal loss, a technique that addresses class imbalance by down-weighting easy, correctly classified examples, thereby focusing training on harder, misclassified ones. This advancement enabled one-stage detectors to achieve accuracy levels comparable to two-stage models. The You Only Look Once (YOLO) family models further improved detection efficiency, making real-time pedestrian detection more practical. This is made possible by introducing anchor boxes to handle various object sizes and shapes better and adopting advanced backbone networks like Darknet-53 to improve feature extraction and detection accuracy.
+
+### Transformer-Based Models
+
+Detection Transformer (DETR) introduced by Carion et al. (2020) presented an end-to-end object detection framework utilizing transformers, eliminating the need for anchor boxes and post-processing steps like Non-Maximum Suppression (NMS). However, challenges such as slow convergence and difficulties in detecting small objects led to the development of Deformable DETR by Zhu et al. (2021), which incorporated multi-scale attention mechanisms to address these issues. Subsequent hybrid models, including the Swin Transformer, enhanced pedestrian detection by integrating hierarchical vision features. To tackle high computational overheads and latency in transformer-based detectors, Real-Time Detection Transformer (RT-DETR) employs a hybrid encoder that efficiently processes multi-scale features and utilizes IoU-aware query selection to improve object query initialization. As a result, RT-DETR offers promising real-time performance while retaining the global context modeling advantages of transformers.
+
+## Datasets and State-of-the-Art Models
+
+A range of pedestrian detection datasets capture diverse conditions, from urban traffic to low-light or thermal imaging. The table below highlights key benchmarks and their current best-performing models:
+
+todo: clean this
+
+- **Caltech** → _LSFM_  
+  A pioneering large-scale dataset from urban driving scenarios, commonly used as a standard benchmark.
+
+- **CityPersons** → _DIW Loss_  
+  Derived from Cityscapes, emphasizing dense crowds and significant occlusions.
+
+- **LLVIP** → _MMPedestron_  
+  Focuses on low-light/nighttime scenes, necessitating specialized approaches.
+
+- **DVTOD** → _YOLOv6 (Thermal)_  
+  Infrared/thermal dataset showing how YOLO variants adapt to non-RGB domains.
+
+- **TJU-Ped-traffic** → _LSFM_  
+  Heavy-traffic settings with frequent occlusions, demanding robust detection.
+
+- **TJU-Ped-campus** → _EGCL_  
+  Campus-based scenarios testing generalization to semi-controlled environments.
+
+- **CVC14** → _CFT_  
+  Smaller, varied dataset evaluating adaptability across different conditions.
+
+- **MMPD-Dataset** → _MMPedestron_  
+  Emphasizes robust, specialized pedestrian detection across multiple challenges.
+
+These datasets and top-performing models illustrate the breadth of current pedestrian detection challenges and innovative solutions in the field.
+
+<!--
 ### Related research that we build upon:
 
 how it's done now: what current typical approach(es)
-Yolo v8 finetune becase: 
-https://arxiv.org/pdf/2404.08081 
+Yolo v8 finetune becase:
+https://arxiv.org/pdf/2404.08081
 
 Fine tune DETR:
 https://arxiv.org/abs/2005.12872
 (here they user RL-DETR-L, we are going to use rtdetr_r50vd)
+
+and this is why:
+https://openaccess.thecvf.com/content/CVPR2024/papers/Zhao_DETRs_Beat_YOLOs_on_Real-time_Object_Detection_CVPR_2024_paper.pdf
 
 PED is pedestrian DETR:
 https://arxiv.org/pdf/2012.06785
@@ -82,8 +127,8 @@ The paper proposes constructing a versatile pedestrian knowledge bank by extract
 what is missing; what the problem is, and what consequences this problem has
 
 explainability - layers vizualization
-computationally heavy - trasfer learning trying to make it quick 
-advesial attacs - trying to make it robust 
+computationally heavy - trasfer learning trying to make it quick
+advesial attacs - trying to make it robust
 
 Other:
 Integrate promts to existing architecture
@@ -95,19 +140,34 @@ what you propose (e.g. explanation of what you're gonna implement but in words)
 2. Answer research questions
 3. Attempt a bigger model -->
 
-### Dataset
+## Dataset
 
-We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity-dataset.tudelft.nl/) benchmark as the data for fine-tuning and testing our models. ECP features street-level city images from a driver's point of view. The entire dataset contains images from all seasons and from 12 cities, with various weather conditions and from different parts of a day. The dataset includes both crowds and heavy occlusions. We decided to use the validation part because of its reasonable size for our experiments: 10 GB and 4266 image-label pairs. We randomly split the images and corresponding annotations from all the cities into train, validation, and test sets in 70-10-20 ratio.
+We selected the validation part of the [EuroCity Persons (ECP)](https://eurocity-dataset.tudelft.nl/) benchmark as the data for fine-tuning and testing our models. ECP features street-level city images from a driver's point of view. The entire dataset contains images from all seasons and 12 cities, with various weather conditions and from different parts of the day. The dataset includes both crowds and heavy occlusions. Given the large scale of the dataset, we decided to focus only on the validation part for our experiments: 10 GB and 4266 image-label pairs. We randomly split the images and corresponding annotations from all the cities into the train, validation, and test sets in a 70-10-20 ratio.
 
-## Training 
+## Model Training
+Pedestrian detection requires fast, real-time, lightweight yet effective models.
+[sadik2024realtimedetectionanalysisvehicles](will insert bibtex citation here later) presented a comparison between YOLOv8 and RT-DETR models in pedestrian detection on images from city traffic cameras. YOLOv8 [yolov8_ultralytics](will insert bibtex citation here later) is a lightweight CNN-based model suitable for real-time detection. RT-DETR [lv2023detrs](will insert bibtex citation here later) is an end-to-end model for object detection with efficient attention-based encoder and decoder architecture. Both models showed competitive performance with YOLOv8 leading slightly on all metrics. 
 
-We decided to fine-tune a pre-trained a YOLO model which show competitive predictive performance in pedestrian detection on images from city traffic cameras [link](https://arxiv.org/pdf/2404.08081). Additionally, we chose [what?] because it' s blablabla.
+Similar results, fundamental architectural differences and the real-time nature of both models make them interesting competing candidates for the pedestrian detection task on images taken from a car and for subsequent experiments. [Ulitralytics PyPI package](https://pypi.org/project/ultralytics/) offers both `YOLOv8` and `RT-DETR` models pre-trained on COCO 2017 dataset for object detection [lin2015microsoft](will insert bibtex citation here later). Although the dataset contains a label for people, it also contains 79 other diverse labels. We narrow down the capabilities of the models by fine-tuning them on a subset from the ECP validation dataset. To compare the models in fair conditions, we decided to use the models of large size (`YOLOv8`, `RT-DETR-L`) and give each model 2.5 hours of fine-tuning time with a Tesla P100 GPU.
 
-### YOLO 
+We trained the models for 50 epochs with a batch size of 16. To speed up the training, the images were resized to fit a 640x640 pixels square with a preserved aspect ratio. The rest of the image was dynamically padded with grey pixels to fill in the square. The rest of the parameters were set to [default](https://docs.ultralytics.com/modes/train/#augmentation-settings-and-hyperparameters). A default data augmentation was applied with the most notable being HSV colour adjustments, mosaic composition, image erasing, and croping.
 
-We used `YOLOv8l` model pre-trained on [COCO](https://cocodataset.org/#home) dataset for object detection. The model is vailable in [Ulitralitics PyPI package](https://pypi.org/project/ultralytics/). While newer versions were proposed, the 8th version still remains a strong baseline for pedestrian detection.
+## Results 
 
-We trained the model on 50 epochs with batch size of 16. To speed up the training, the images were resized to fit a 640x640 pixels square with a preserved aspect ratio. The rest of the image was padded with grey pixels.
+We compare the predictive performance of `YOLOv8l` and `RT-DETR-L` models using standard object detection evaluation metrics: precision, recall, f1-score and mean average precision (mAP) for different intersection over union (IoU) thresholds. The best result per metric is shown in bold.
 
-### Other Model? Why?
+| Metric                                      | YOLOv8  | RT-DETR |
+|---------------------------------------------|--------|----------|
+| mAP at 0.05-0.95 IoU                      | 0.4546 | **0.4551**   |
+| mAP at 0.50 IoU                           | 0.7273 | **0.7628**  |
+| mAP at 0.75 IoU                           | **0.4776** | 0.4679  |
+| Precision                                 | **0.8129** | 0.8033  |
+| Recall                                    | 0.6514 | **0.6706**  |
+| F1-score                                  | 0.7233 | **0.7310** |
 
+
+The mean average precision (mAP) at 0.05-0.95 IoU thresholds is nearly identical for both models, with RT-DETR being slightly better. In the case of mAP at 0.50 IoU, RT-DETR shows a slightly superior predictive performance (0.7628 vs. 0.7273). However, for mAP at 0.75 IoU, YOLOv8 achieves a higher value (0.4776 vs. 0.4679). This suggests that YOLOv8 is more effective at pinpointing people with higher localization accuracy while RT-DETR is more effective at globally identifying pedestrians with more relaxed thresholds.
+
+In terms of precision, YOLOv8 outperforms RT-DETR (0.8129 vs. 0.8033), meaning it generates fewer boxes with no people on average. However, RT-DETR achieves a higher recall (0.6706 vs. 0.6514) that shows the model's generally better ability to identify pedestrians. The precision-recall trade-off is reflected in the F1-score, where the results are on par with RT-DETR leading by a small margin.
+
+Overall, the results show RT-DETR leads in terms of recall and general detection performance (mAP at 0.05-0.95) which makes it a better candidate for detecting people in crowded areas. In contrast, YOLOv8 surpasses RT-DETR in more precise pedestrian detection, according to precision and mAP at 0.75, making it a good fit for a more accurate localization of detected people.

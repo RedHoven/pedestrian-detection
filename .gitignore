@@ -86,6 +86,6 @@ htmlcov/
 
 # Project specific
 datasets/
-yolo_training/
-*.html
-contrast/
+training/
+results/
+_site/

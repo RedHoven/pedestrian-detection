@@ -1,0 +1,20 @@
+# Setup
+title:               Pedestrian Detection | TU Delft  
+description:         'Group 1: Pedestrian Detection. How can we ensure robust and safe pedestrian detection in a variety of environments?'
+github:             'https://github.com/RedHoven/pedestrian-detection'
+paginate:            1
+permalink:           pretty
+baseurl:             '/pedestrian-detection'
+
+# Gems
+plugins:
+  - jekyll-paginate
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+
+  include:
+  - public/models/yolov8.onnx
+  - public/models/rtdetr.onnx
