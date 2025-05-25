@@ -1,7 +1,7 @@
 # Pedestrian Detection using Computer Vision
 ---
 
-The project is about evaluating pedestriang detection with computer vision from different angles.
+The project is about evaluating pedestrian detection with computer vision from different angles.
 Read out blog at https://redhoven.github.io/pedestrian-detection/ to know more!
 
 ### How to setup the environment?
