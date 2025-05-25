@@ -2,7 +2,7 @@
 ---
 
 The project is about evaluating pedestrian detection with computer vision from different angles.
-Read out blog at https://redhoven.github.io/pedestrian-detection/ to know more!
+Read our blog at https://redhoven.github.io/pedestrian-detection/ to know more!
 
 ### How to setup the environment?
 ```
