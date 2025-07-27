@@ -11,6 +11,15 @@ title: Blog
       </h1>
 
       <span class="post-date">{{ post.date | date_to_string }}</span>
+      <span class="post-tags">Tags: {{ post.tagline | join: ', ' }}.</span><br/>
+      <span class="post-authors">
+        By:
+          {% for author in post.authors %}
+            <a href="{{ author.github }}">{{ author.name }}</a>
+            {% if forloop.last == false %}, {%else %}{% endif %}
+          {% endfor %}
+        for <a href ="{{ post.course.link }}">{{ post.course.name }}</a> course.
+      </span>
 
       {{ post.content }}
     </div>
