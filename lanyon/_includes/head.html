@@ -1,0 +1,54 @@
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    {% if page.title == "Blog" %}
+      {{ site.title }}
+    {% else %}
+      {{ page.title }}
+    {% endif %}
+  </title>
+
+  {% if page.url and site.baseurl %}
+  <link rel="canonical" href="{{ page.url | relative_url }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ '/public/css/poole.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/public/css/syntax.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | relative_url }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <link rel="icon" sizes="144x144" href="{{ '/public/tudelft-logo.png' | relative_url }}">
+  <link rel="shortcut icon" href="{{ '/public/tudelft-logo-mini.ico' | relative_url }}">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/atom.xml' | relative_url }}">
+
+  <!-- LATEX Setup-->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      var PARSE = MathJax.InputJax.TeX.Parse,
+          TEXT = PARSE.prototype.InternalText;
+      PARSE.Augment({
+        InternalText: function (text,def) {
+          text = text.replace(/\\/g,"");
+          return TEXT.call(this,text,def);
+        }
+      });
+    });
+    </script>
+    
+  <!-- ToC -->
+  <link rel="stylesheet" href="{{ '/public/css/toc.css' | relative_url }}">
+  <script src="{{ '/public/js/toc-generator.js' | relative_url }}"></script>
+</head>
